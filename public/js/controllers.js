@@ -1,13 +1,15 @@
+var app = angular.module('app');
 
-
-
-var controllers = {};
-
-controllers.MyCtrl1 = function() {}
-controllers.MyCtrl1.$inject = [];
-
-controllers.MyCtrl2 = function() {}
-controllers.MyCtrl2.$inject = [];
-
-
+app.controller('mainCtrl', function() {
+   this.codeMirrorOptions = {
+       lineWrapping : true,
+       lineNumbers: true,
+       readOnly: false,
+       mode: 'sql',
+       value: "Shoot the next man in the freaky suit",
+       allowEditingOriginals: true,
+       matchBrackets: true,
+       theme: 'dracula'
+   }
+});
 
