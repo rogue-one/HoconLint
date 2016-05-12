@@ -19,9 +19,16 @@ app.controller('mainCtrl', ['RestService',function(RestService) {
     }
 
     this.resultMode = true;
+    this.finalMessage = ""
 
     this.submit = function() {
-        RestService.submit()
+        RestService.submit(this.payload)
+            .then(function(result){
+            this.payload = result;
+            this.finalMessage = "Parsed Successfully";
+        }, function(error) {
+            this.finalMessage = "Parsing Failed";
+            });
     }
 
 
