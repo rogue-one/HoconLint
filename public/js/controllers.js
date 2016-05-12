@@ -1,6 +1,7 @@
 var app = angular.module('app');
 
-app.controller('mainCtrl', function() {
+app.controller('mainCtrl', ['RestService',function(RestService) {
+
    this.codeMirrorOptions = {
        lineWrapping : true,
        lineNumbers: true,
@@ -11,5 +12,18 @@ app.controller('mainCtrl', function() {
        matchBrackets: true,
        theme: 'dracula'
    }
-});
+
+    this.codemirrorLoaded = function(editor) {
+        console.log("hey everyone!!")
+        editor.setSize("100%", 450)
+    }
+
+    this.resultMode = true;
+
+    this.submit = function() {
+        RestService.submit()
+    }
+
+
+}]);
 

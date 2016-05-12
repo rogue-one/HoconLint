@@ -1,14 +1,13 @@
-/*global define */
 
-'use strict';
+var app = angular.module('app', []);
 
-define(['angular'], function(angular) {
+app.factory('RestService',['$http',function($http) {
+  var path = "/api/parse"
+  var submit = function(data) {
+    $http.post(path,data)
+  };
+  return {
+    'submit': submit
+  }
 
-/* Services */
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('myApp.services', []).
-  value('version', '0.1');
-
-});
+}]);
