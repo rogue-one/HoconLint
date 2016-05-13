@@ -15,13 +15,12 @@
             <div class="main-content-div" ng-controller="mainCtrl as main">
                 <form class="main" id="code" name="code">
                     <div ng-model="main.payload" ui-codemirror="{ onLoad : main.codemirrorLoaded }" ui-codemirror-opts="main.codeMirrorOptions">
-                        Code mirror here
                     </div>
                     <button type="button" class="btn btn-primary app-form-controls" ng-click="main.submit()">Validate</button>
-                    <button type="button" class="btn btn-secondary app-form-controls">Clear</button>
+                    <button type="button" class="btn btn-secondary app-form-controls" ng-click="main.clearBoard()">Clear</button>
                 </form>
-                <div ng-show="main.resultMode">
-                    {{finalMessage}}
+                <div ng-show="main.resultMode" ng-class="main.bannerClass">
+                    {{main.finalMessage}}
                 </div>
             </div>
         </div>

@@ -1,33 +1,47 @@
 var app = angular.module('app');
 
-app.controller('mainCtrl', ['RestService',function(RestService) {
+app.controller('mainCtrl', ['RestService', function (RestService) {
 
-   this.codeMirrorOptions = {
-       lineWrapping : true,
-       lineNumbers: true,
-       readOnly: false,
-       mode: 'sql',
-       value: "Shoot the next man in the freaky suit",
-       allowEditingOriginals: true,
-       matchBrackets: true,
-       theme: 'dracula'
-   }
+    var self = this;
+    self.resultMode = false;
+    self.finalMessage = "";
+    self.success = false;
+    self.bannerClass = null;
 
-    this.codemirrorLoaded = function(editor) {
-        console.log("hey everyone!!")
+    self.codeMirrorOptions = {
+        lineWrapping: true,
+        lineNumbers: true,
+        readOnly: false,
+        mode: 'sql',
+        allowEditingOriginals: true,
+        matchBrackets: true,
+        theme: 'dracula'
+    };
+
+
+    self.clearBoard = function() {
+        self.payload = "";
+    };
+
+
+    self.codemirrorLoaded = function (editor) {
         editor.setSize("100%", 450)
-    }
+    };
 
-    this.resultMode = true;
-    this.finalMessage = ""
-
-    this.submit = function() {
+    self.submit = function () {
+        console.log("submitting content");
         RestService.submit(this.payload)
-            .then(function(result){
-            this.payload = result;
-            this.finalMessage = "Parsed Successfully";
-        }, function(error) {
-            this.finalMessage = "Parsing Failed";
+            .then(function (result) {
+                self.success = true;
+                self.resultMode = true;
+                self.payload = JSON.stringify(result.data, undefined, 2);
+                self.finalMessage = "Valid HOCON";
+                self.bannerClass = "result-success";
+            }, function (error) {
+                self.success = false;
+                self.resultMode = true;
+                self.finalMessage = error.data;
+                self.bannerClass = "result-failure";
             });
     }
 

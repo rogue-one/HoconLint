@@ -27,3 +27,28 @@ body {
     margin-right: 5px;
 }
 
+.result-success {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #E6EFC2;
+    padding: 5px;
+    border: 1px solid;
+    line-height: 3;
+}
+
+.result-failure {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #FBE3E4;
+    line-height: 3;
+    padding: 5px;
+    border: 1px solid;
+
+}
+
+.navbar-brand {
+    font-size: 2em; !important;
+    line-height: 1; !important;
+    font-weight: 400; !important;
+    color: white; !important;
+}
